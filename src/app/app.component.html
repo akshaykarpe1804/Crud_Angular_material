@@ -1,0 +1,74 @@
+<div style="display: flex; flex-direction: column; align-items: center;">
+  <form [formGroup]="studentForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="fill">
+      <mat-label>Name</mat-label>
+      <input matInput formControlName="name">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Gender</mat-label>
+      <mat-select formControlName="gender">
+        <mat-option value="male">Male</mat-option>
+        <mat-option value="female">Female</mat-option>
+        <mat-option value="other">Other</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Course</mat-label>
+      <mat-select formControlName="course">
+        <mat-option value="computer-science">Computer Science</mat-option>
+        <mat-option value="mechanical">Mechanical</mat-option>
+        <mat-option value="civil">Civil</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-radio-group formControlName="enrollmentType">
+      <mat-radio-button value="full-time">Full-time</mat-radio-button>
+      <mat-radio-button value="part-time">Part-time</mat-radio-button>
+    </mat-radio-group>
+
+    <mat-checkbox formControlName="isScholarship">Scholarship</mat-checkbox>
+
+    <button mat-raised-button color="primary" type="submit">Submit</button>
+  </form>
+
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="gender">
+      <th mat-header-cell *matHeaderCellDef> Gender </th>
+      <td mat-cell *matCellDef="let element"> {{element.gender}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="course">
+      <th mat-header-cell *matHeaderCellDef> Course </th>
+      <td mat-cell *matCellDef="let element"> {{element.course}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="enrollmentType">
+      <th mat-header-cell *matHeaderCellDef> Enrollment Type </th>
+      <td mat-cell *matCellDef="let element"> {{element.enrollmentType}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="isScholarship">
+      <th mat-header-cell *matHeaderCellDef> Scholarship </th>
+      <td mat-cell *matCellDef="let element"> {{element.isScholarship ? 'Yes' : 'No'}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef> Actions </th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-button (click)="editStudent(element)">Edit</button>
+        <button mat-button (click)="deleteStudent(element)">Delete</button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>
